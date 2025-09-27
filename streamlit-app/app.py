@@ -3,19 +3,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from src.data_transformation import get_processed_data
+from src.ingest_transform import get_processed_data
 from src.model_selection import time_series_split, train_and_select_model
 from src.model_selection import save_model, load_model, create_features
 
-# ---------------------------------------------------------
-# Load processed data once (fast reloads for Streamlit)
+st.title("FreshRetailNet50k Sales Forecast")
+
 @st.cache_data
 def load_data():
     return get_processed_data()
 
 df = load_data()
 
-# ---------------------------------------------------------
 # Sidebar Inputs
 st.sidebar.header("Sales Forecast Settings")
 
@@ -44,7 +43,7 @@ if st.sidebar.button("Run Forecast"):
         results = {"cached_model": {"rmse": "N/A", "mae": "N/A"}}  # placeholder metrics
     else:
         st.info("Training new model ⚡")
-        train, val = time_series_split(df_subset, train_days)
+        train, val = time_series_split(df_subset, train_days-7)
         best_model, results = train_and_select_model(train, val)
         save_model(best_model, store_id, product_id, train_days)
 
@@ -56,21 +55,22 @@ if st.sidebar.button("Run Forecast"):
         st.write(f"Model: {best_model_name}")
         st.write(best_model_metrics)
 
-    # Forecast on validation window
-    val_feat = create_features(df_subset.iloc[train_days:])  # last window
-    X_val = val_feat.drop(columns=["sale_amount", "dt"])
-    y_val = val_feat["sale_amount"]
+    
+   
+    X_val = val.drop(columns=["sale_amount", "dt"])
+    y_val = val["sale_amount"]
 
-    print(val_feat)
+
     preds = best_model.predict(X_val)
 
     # Plot results
     fig, ax = plt.subplots(figsize=(10, 5))
-    ax.plot(val_feat["dt"], y_val, label="Actual Sales", marker="o")
-    ax.plot(val_feat["dt"], preds, label="Forecast", marker="x")
+    ax.plot(val["dt"], y_val, label="Actual Sales", marker="o")
+    ax.plot(val["dt"], preds, label="Forecast", marker="x")
     ax.set_title(f"Store {store_id} - Product {product_id}")
     ax.set_xlabel("Date")
     ax.set_ylabel("Sales Amount")
+    ax.tick_params(labelrotation=45)
     ax.legend()
 
     st.pyplot(fig)

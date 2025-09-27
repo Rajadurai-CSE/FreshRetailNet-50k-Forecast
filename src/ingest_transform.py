@@ -3,13 +3,15 @@ import os
 
 ROOT_DIR = os.path.abspath(os.path.join(os.getcwd(), ".."))
 
-# Paths
+
 RAW_DATA_PATH = os.path.join(ROOT_DIR, "data", "raw", "train.parquet")
 PROCESSED_DATA_PATH = os.path.join(ROOT_DIR, "data", "processed", "train_processed.parquet")
 
 def load_raw_data(path: str = RAW_DATA_PATH) -> pd.DataFrame:
     """Load raw parquet file."""
-    return pd.read_parquet(path)
+
+    #We will work on train split
+    return pd.read_parquet("hf://datasets/Dingdong-Inc/FreshRetailNet-50K/data/train.parquet")
 
 
 def transform_data(df: pd.DataFrame) -> pd.DataFrame:
@@ -29,7 +31,7 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
     df['sale_amount'] = df['sale_amount'] + (df['sale_amount'] / den) * num
 
     drop_cols = [
-        "city_id"
+        "city_id",
         "hours_stock_status",
         "hours_sale",
         "management_group_id",
@@ -38,7 +40,7 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
         "third_category_id",
         "stock_hour6_22_cnt"
     ]
-    df.drop(columns=drop_cols, inplace=True, errors="ignore")
+    df.drop(columns=drop_cols, inplace=True)
 
     return df
 

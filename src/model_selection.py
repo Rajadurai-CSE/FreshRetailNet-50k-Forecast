@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import lightgbm as lgb
 import xgboost as xgb
 import joblib
-import os
-from src.data_transformation import get_processed_data
+import os,sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from src.ingest_transform import get_processed_data
 
 ROOT_DIR = os.path.abspath(os.path.join(os.getcwd(), ".."))
 MODEL_SAVE_PATH = os.path.join(ROOT_DIR, "models")
@@ -17,8 +17,9 @@ def time_series_split(df: pd.DataFrame, train_window: int):
     Split df into train and validation based on given windows.
     Assumes df is already filtered for a single store/product combination.
     """
-    df = df.sort_values("dt")
-    train = df.iloc[0:train_window]
+    df = create_features(df)
+    df = df.reset_index(drop=True)
+    train = df.iloc[:train_window]
     val = df.iloc[train_window:]
     return train, val
 
@@ -47,16 +48,14 @@ def train_and_select_model(train: pd.DataFrame, val: pd.DataFrame):
     results = {}
 
     # Features/Target
-    train = create_features(train)
-    val = create_features(val)
+
 
     X_train, y_train = train.drop(columns=["sale_amount", "dt"]), train["sale_amount"]
     X_val, y_val = val.drop(columns=["sale_amount", "dt"]), val["sale_amount"]
 
     # Candidate models
     models = {
-        # "LinearRegression": LinearRegression(),
-        "LightGBM": lgb.LGBMRegressor(),
+        "LightGBM": lgb.LGBMRegressor(verbosity=-1),
         "XGBoost": xgb.XGBRegressor(),
     }
 
@@ -64,7 +63,6 @@ def train_and_select_model(train: pd.DataFrame, val: pd.DataFrame):
     best_score = float("inf")
 
     for name, model in models.items():
-        print("X_train shape",X_train.shape)
         model.fit(X_train, y_train)
         preds = model.predict(X_val)
         metrics = evaluate_model(y_val, preds)
@@ -74,7 +72,7 @@ def train_and_select_model(train: pd.DataFrame, val: pd.DataFrame):
             best_score = metrics["rmse"]
             best_model = model
 
-    return best_model, results
+    return best_model,results
 
 
 def get_model_path(store_id: str, product_id: str, train_days: int) -> str:
@@ -98,20 +96,20 @@ def load_model(store_id: str, product_id: str, train_days: int):
         return joblib.load(path)
     return None
 
-# Example usage (with placeholder windows)
+
 if __name__ == "__main__":
     df = get_processed_data()
 
     # Placeholder: Assume user chooses store_id=1, product_id=101
-    df_subset = df[(df["store_id"] == 1) & (df["product_id"] == 101)]
+    df_subset = df[(df["store_id"] == 1) & (df["product_id"] == 4)]
+    print(len(df_subset))
+    train_window = 78  # user placeholder
 
-    train_window = 100  # user placeholder
-    forecast_window = 30  # user placeholder
 
-    train, val = time_series_split(df_subset, train_window, forecast_window)
+    train, val = time_series_split(df_subset.sort_values("dt").reset_index(drop=True), train_window-7)
+    print(val)
+    # best_model, results = train_and_select_model(train, val)
+    # save_model(best_model)
 
-    best_model, results = train_and_select_model(train, val)
-    save_model(best_model)
-
-    print("Model evaluation results:", results)
-    print("Best model saved at:", MODEL_SAVE_PATH)
+    # print("Model evaluation results:", results)
+    # print("Best model saved at:", MODEL_SAVE_PATH)
