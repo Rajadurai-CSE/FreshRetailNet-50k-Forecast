@@ -37,7 +37,7 @@ The project uses **FreshRetailNet-50K**, a large-scale, real-world perishable go
 
 ## 📈 Sample Visualizations
 
-<img width="737" height="540" alt="EDA Visualization 1" src="https://github.com/user-attachments/assets/9dd69f33-9a2d-4fa0-b421-425e2b90037b" />
+<img width="855" height="393" alt="image" src="https://github.com/user-attachments/assets/8ae01af5-2018-4f0e-8c3e-90a3aef321f7" />
 
 <img width="774" height="537" alt="EDA Visualization 2" src="https://github.com/user-attachments/assets/e09b730a-7609-4b78-bebf-4300ca1fe1d7" />
 
