@@ -97,19 +97,4 @@ def load_model(store_id: str, product_id: str, train_days: int):
     return None
 
 
-if __name__ == "__main__":
-    df = get_processed_data()
 
-    # Placeholder: Assume user chooses store_id=1, product_id=101
-    df_subset = df[(df["store_id"] == 1) & (df["product_id"] == 4)]
-    print(len(df_subset))
-    train_window = 78  # user placeholder
-
-
-    train, val = time_series_split(df_subset.sort_values("dt").reset_index(drop=True), train_window-7)
-    print(val)
-    # best_model, results = train_and_select_model(train, val)
-    # save_model(best_model)
-
-    # print("Model evaluation results:", results)
-    # print("Best model saved at:", MODEL_SAVE_PATH)

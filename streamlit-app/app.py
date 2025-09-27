@@ -5,7 +5,7 @@ import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.ingest_transform import get_processed_data
 from src.model_selection import time_series_split, train_and_select_model
-from src.model_selection import save_model, load_model, create_features
+from src.model_selection import save_model, load_model
 
 st.title("FreshRetailNet50k Sales Forecast")
 
