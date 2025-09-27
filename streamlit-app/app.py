@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import matplotlib.pyplot as plt
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -40,7 +39,7 @@ if st.sidebar.button("Run Forecast"):
 
     if best_model:
         st.success("Loaded cached model 🚀")
-        results = {"cached_model": {"rmse": "N/A", "mae": "N/A"}}  # placeholder metrics
+        results = {"cached_model": {"rmse": "N/A", "mae": "N/A"}} 
     else:
         st.info("Training new model ⚡")
         train, val = time_series_split(df_subset, train_days-7)
