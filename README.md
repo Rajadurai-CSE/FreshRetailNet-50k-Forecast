@@ -41,8 +41,6 @@ The project uses **FreshRetailNet-50K**, a large-scale, real-world perishable go
   <img width="400" height="300" alt="Demand Forecast Visualization" src="https://github.com/user-attachments/assets/32e16d27-a981-48df-be7b-45874a3250b7" />
 </div>
 <img width="400" height="300" alt="EDA Analysis" src="https://github.com/user-attachments/assets/51606dc5-209a-4a8a-98aa-dc7ab930ce49" />
-✅ Results
-<img width="1919" height="900" alt="FreshRetailNet Results Dashboard" src="https://github.com/user-attachments/assets/e0f2c4ef-4a34-446c-b44d-f7b0643232f5" />
 
 
 ## ✅ Results
