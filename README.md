@@ -35,25 +35,6 @@ The project uses **FreshRetailNet-50K**, a large-scale, real-world perishable go
 6. **Time of Day**: Higher sales in morning and afternoon
 7. **Day of Week**: Weekends see more sales than weekdays
 
-📈 Sample Visualizations
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
-
-  <div style="flex: 1 1 400px; text-align: center;">
-    <img width="100%" max-width="400" alt="Sales Analysis Visualization" src="https://github.com/user-attachments/assets/8ae01af5-2018-4f0e-8c3e-90a3aef321f7" />
-  </div>
-
-  <div style="flex: 1 1 400px; text-align: center;">
-    <img width="100%" max-width="400" alt="Demand Forecast Visualization" src="https://github.com/user-attachments/assets/32e16d27-a981-48df-be7b-45874a3250b7" />
-  </div>
-
-  <div style="flex: 1 1 400px; text-align: center;">
-    <img width="100%" max-width="400" alt="EDA Analysis" src="https://github.com/user-attachments/assets/51606dc5-209a-4a8a-98aa-dc7ab930ce49" />
-  </div>
-
- 
-
-</div>
-
 
 
 ## ✅ Results
