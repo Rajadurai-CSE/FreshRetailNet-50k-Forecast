@@ -6,7 +6,7 @@ import xgboost as xgb
 import joblib
 import os,sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from src.ingest_transform import get_processed_data
+
 
 ROOT_DIR = os.path.abspath(os.path.join(os.getcwd(), ".."))
 MODEL_SAVE_PATH = os.path.join(ROOT_DIR, "models")
