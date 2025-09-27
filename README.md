@@ -35,16 +35,15 @@ The project uses **FreshRetailNet-50K**, a large-scale, real-world perishable go
 6. **Time of Day**: Higher sales in morning and afternoon
 7. **Day of Week**: Weekends see more sales than weekdays
 
-## 📈 Sample Visualizations
+📈 Sample Visualizations
+<div align="center">
+  <img width="400" height="300" alt="Sales Analysis Visualization" src="https://github.com/user-attachments/assets/8ae01af5-2018-4f0e-8c3e-90a3aef321f7" />
+  <img width="400" height="300" alt="Demand Forecast Visualization" src="https://github.com/user-attachments/assets/32e16d27-a981-48df-be7b-45874a3250b7" />
+</div>
+<img width="400" height="300" alt="EDA Analysis" src="https://github.com/user-attachments/assets/51606dc5-209a-4a8a-98aa-dc7ab930ce49" />
+✅ Results
+<img width="1919" height="900" alt="FreshRetailNet Results Dashboard" src="https://github.com/user-attachments/assets/e0f2c4ef-4a34-446c-b44d-f7b0643232f5" />
 
-<img width="855" height="393" alt="image" src="https://github.com/user-attachments/assets/8ae01af5-2018-4f0e-8c3e-90a3aef321f7" />
-
-<img width="855" height="393" alt="image" src="https://github.com/user-attachments/assets/32e16d27-a981-48df-be7b-45874a3250b7" />
-
-
-<img width="725" height="562" alt="EDA Visualization 3" src="https://github.com/user-attachments/assets/51606dc5-209a-4a8a-98aa-dc7ab930ce49" />
-
-<img width="737" height="549" alt="EDA Visualization 4" src="https://github.com/user-attachments/assets/b5503ed5-918c-4fbc-95cc-73a972ca8f85" />
 
 ## ✅ Results
 
